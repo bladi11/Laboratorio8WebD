@@ -37,15 +37,18 @@ namespace Laboratorio8WebD
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            Leer(); //carga la lista de jugadores
+            //PostBack todas las veces que la pagina se recarga menos la primera vez
+            //la primera vez que se carga no es postback
+            //sirve para evitar que cuando carge la pagina coloquie de nuevo los datos recientes y evitar que se repitan los datos 
+            if(!IsPostBack)//negacion postback, evitar la nueva carga de la pagina y datos
+            {
+                Leer(); //carga la lista de jugadores
+                DropDownList1.DataValueField = "id"; //dato que queremos guardar
+                DropDownList1.DataTextField = "nombre"; //dato  que queremos mostrar
 
-            DropDownList1.DataValueField = "id";
-            DropDownList1.DataMember = "nombre";
-
-            DropDownList1.DataSource = jugadores;
-            DropDownList1.DataBind(); //remplaza el refresh
-
-
+                DropDownList1.DataSource = jugadores;
+                DropDownList1.DataBind(); //remplaza el refresh
+            }
         }
 
         private void Guardar()
@@ -71,7 +74,7 @@ namespace Laboratorio8WebD
         {
             Resultado resultado = new Resultado();
 
-            resultado.idjugador = Convert.ToInt16(DropDownList1.SelectedValue);
+            resultado.idjugador = Convert.ToInt16(DropDownList1.SelectedValue); //sectedvalue guarda el id del nombre seleccionado, si se quiere que se gurade el nombre se selecciona .text
             resultado.fecha = Calendar1.SelectedDate;
             resultado.equipo = TextBoxEquipo.Text;
             resultado.goles = Convert.ToInt16(TextBoxGoles.Text);

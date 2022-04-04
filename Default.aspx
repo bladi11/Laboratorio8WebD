@@ -19,11 +19,18 @@
         Equipo<br />
         <asp:TextBox ID="TextBoxEquipo" runat="server"></asp:TextBox>
         <br />
+        <asp:RequiredFieldValidator ID="RequiredFieldValidatorEquipo" runat="server" ControlToValidate="TextBoxEquipo" ErrorMessage="Agrege el nombre del equipo no sea imbecil" SetFocusOnError="True"></asp:RequiredFieldValidator>
+        <br />
         Goles<br />
         <asp:TextBox ID="TextBoxGoles" runat="server"></asp:TextBox>
         <br />
+        <asp:RequiredFieldValidator ID="RequiredFieldValidatorGoles" runat="server" ControlToValidate="TextBoxGoles" ErrorMessage="Debe Ingresar algun dato" SetFocusOnError="True"></asp:RequiredFieldValidator>
+        <br />
+        <asp:RangeValidator ID="RangeValidatorGoles" runat="server" ControlToValidate="TextBoxGoles" ErrorMessage="Debe ingresar un numero entre 1 y 10" MaximumValue="10" MinimumValue="1" SetFocusOnError="True" Type="Integer"></asp:RangeValidator>
         <br />
         <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Guardar" />
+        
+        <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
         
     </div>
 
